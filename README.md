@@ -1,1 +1,0 @@
-# vocabulatu_trainer
