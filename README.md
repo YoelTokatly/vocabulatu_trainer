@@ -1,4 +1,5 @@
 # Vocabulary Trainer
+A simple interactive vocabulary learning tool with a CLI interface and an optional Streamlit web application.
 
 Vocabulary Trainer is a simple tool designed to help users improve their vocabulary by practicing and learning new words interactively.
 
@@ -19,11 +20,20 @@ Vocabulary Trainer is a simple tool designed to help users improve their vocabul
     ```
 
 ## Usage
-1. Run the application:
+### CLI Application
+1. Run the CLI application:
     ```bash
     python main.py
     ```
 2. Follow the on-screen instructions to start training your vocabulary.
+
+### Streamlit Web Application
+1. Run the Streamlit app:
+    ```bash
+    streamlit run app.py
+    ```
+2. Open your browser and navigate to the URL shown in the terminal (typically http://localhost:8501).
+3. Use the web interface to interact with the vocabulary trainer.
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests.
