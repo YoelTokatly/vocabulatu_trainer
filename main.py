@@ -1,15 +1,17 @@
 # /// script
 # requires-python = ">=3.12"
-# dependencies = []
+# dependencies = [
+# "pandas==2.2.3"]
 # ///
 
 from functions import  Functions
 from start import initial_db
 import json
-import polars as pl
+# import polars as pl
 from constant import FILE_PATH
 from constant import DB_PATH
-# import pandas as pd
+import pandas as pd
+import sqlite3 
 # my_functions = Functions()
 
 

@@ -1,16 +1,16 @@
 
 import json
-import polars as pl
+# import polars as pl
 import pandas as pd
 import constant as cs
 import sqlite3
+from time import sleep
 
 class Functions: 
             def  edit(DB_PATH):                
                 conn = sqlite3.connect(DB_PATH)
                 query = f"SELECT *  FROM vocabulary"
                 df_result = pd.read_sql(query,conn) 
-
                 cursor = conn.cursor()
                 choose =input ("do you what to: (a) for adding , 'd' for deliting , 'u' for updating").lower().strip()
                 if choose == 'a':
@@ -57,14 +57,13 @@ class Functions:
                             q_result = pd.read_sql(query,conn)
                             # print(q_result)
                             id_2_delete = int(input(f'please select id to update {q_result}'))
-                            df_2_delete =q_result[ q_result['id'] == id_2_delete]
+                            df_2_delete = q_result[ q_result['id'] == id_2_delete]
                             meaning = input ("Enter updated meaning:") 
                             
-                
                             query = f"UPDATE vocabulary SET meaning = {meaning} where id = {id_2_delete}"
                             
                             # # Execute the update query
-                            cursor.execute(query)
+                            cursor.execute(query,(meaning,id_2_delete))
                             
                             # # Get the number of affected rows
                             # updated_count = cursor.rowcount
@@ -79,14 +78,38 @@ class Functions:
 
 
             def  traning(DB_PATH):
-                    conn = sqlite3.connect(DB_PATH)
-                    query = f"SELECT *  FROM vocabulary"
-                    df_result = pd.read_sql(query,conn) 
-                    sampel = str(df_result.sample(n=1)['word'])
-                    print(f'The word is : {sampel}')
+                conn = sqlite3.connect(DB_PATH)
+                query = f"SELECT *  FROM vocabulary"
+                df_db = pd.read_sql(query,conn) 
+                df_db['meaning'] = df_db['meaning'].str.lower()
+                df_db['meaning'][0:0:-1]
+                filter = df_db['unit_id'].str.contains('unit_')
+                units = df_db['unit_id'][filter].drop_duplicates().reset_index(drop=True)
+                unit_filter = input(f"Select unit: {units} ")
+                df_result = df_db[df_db['unit_id'] == 'unit_'+unit_filter]
+                score = 0
+                # Quize
+                # for word in df_result['word']:
+                #         print(f'word is : {word}')
+                #         meaning = input("Enter meaning:")
+                #         if meaning == df_result[df_result['word'] == word]['meaning'].values[0]:
+                #             score += 1
+                #             print("correct")
+                #             exit()
+                #         else:
+                #             print("wrong")
+                #             print(f"the correct answer is : {df_result[df_result['word'] == word]['meaning'].values[0]}")
+                # print (f"your score is : {score} out of {len(df_result)}")
 
-                    print("i will trane")
-                    exit()
+                # remember
+                for word in df_result['word']:
+                        print(f'word is : {word}')
+                        sleep(2)
+                        print(f"Meaning {df_result[df_result['word'] == word]['meaning'].values[0]}")
+      
+
+                conn.close()
+                exit()
             
             def  testing():
                     print("i will test")
