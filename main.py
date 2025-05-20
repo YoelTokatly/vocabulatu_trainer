@@ -25,7 +25,7 @@ def main():
     elif mode == 't':
         Functions.traning(DB_PATH)
     elif mode == 'q':
-        Functions.testing()
+        Functions.testing(DB_PATH)
     else :
         mode=input("choose mode 'e' for edit, 't' for Training or 'q' for Testing").lower().strip()
 
