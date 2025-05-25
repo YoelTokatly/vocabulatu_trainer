@@ -30,7 +30,7 @@ Vocabulary Trainer is a simple tool designed to help users improve their vocabul
 ### Streamlit Web Application
 1. Run the Streamlit app:
     ```bash
-    streamlit run app.py
+    streamlit run main_st.py
     ```
 2. Open your browser and navigate to the URL shown in the terminal (typically http://localhost:8501).
 3. Use the web interface to interact with the vocabulary trainer.
